@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
 import { useNavigate } from "react-router-dom";
@@ -38,18 +38,18 @@ const Signup = () => {
   };
 
   return (
-    <div className="border rounded-lg">
+    <div className="border rounded-lg border-gray-900 pt-5 text-black">
       <h1 className="text-xl font-semibold text-center mt-2">Signup</h1>
       <form
-        className="card-body items-center text-center"
+        className="card-body items-center text-center text-black"
         onSubmit={submitHandler}
       >
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered  flex items-center gap-2 bg-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
             fill="currentColor"
-            className="w-4 h-4 opacity-70"
+            className="w-4 h-4 opacity-70  "
           >
             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
           </svg>
@@ -58,12 +58,12 @@ const Signup = () => {
             name="fullname"
             value={signupData.fullname}
             onChange={handleInputChange}
-            className="grow"
+            className="grow placeholder-black placeholder-opacity-50"
             placeholder="Fullname"
           />
         </label>
 
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2 bg-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -78,12 +78,12 @@ const Signup = () => {
             name="email"
             value={signupData.email}
             onChange={handleInputChange}
-            className="grow"
+            className="grow placeholder-black placeholder-opacity-50"
             placeholder="Email"
           />
         </label>
 
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2 bg-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -101,12 +101,12 @@ const Signup = () => {
             name="password"
             value={signupData.password}
             onChange={handleInputChange}
-            className="grow"
+            className="grow placeholder-black placeholder-opacity-50"
             placeholder="Password"
           />
         </label>
 
-        <label className="input input-bordered flex items-center gap-2">
+        <label className="input input-bordered flex items-center gap-2 bg-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -124,7 +124,7 @@ const Signup = () => {
             name="confirmPassword"
             value={signupData.confirmPassword}
             onChange={handleInputChange}
-            className="grow"
+            className="grow placeholder-black placeholder-opacity-50"
             placeholder="Confirm Password"
           />
         </label>
@@ -158,7 +158,10 @@ const Signup = () => {
           Signup
         </button>
         <p>
-          New User <Link to={"/"}>Login</Link>
+          Already have an{" "}
+          <Link to={"/"}>
+            <span className="text-blue-700">account?</span>
+          </Link>
         </p>
       </form>
     </div>

@@ -1,8 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <div className="navbar bg-base-100 z-1 fixed bg-[#90e0ef] text-black">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">TMS</a>
+        <a
+          className="btn btn-ghost text-xl"
+          onClick={() => navigate("/owner/123")}
+        >
+          TMS
+        </a>
       </div>
       <div className="flex-none gap-2">
         {/* Notification */}
