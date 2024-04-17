@@ -8,10 +8,6 @@ const supabase = createClient(
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false); // Set initial loading state to false
-  console.log(
-    import.meta.env.VITE_SUPABASE_URL,
-    import.meta.env.VITE_SUPABASE_ANON_KEY
-  );
   const login = async ({
     fullname,
     email,
@@ -20,7 +16,6 @@ export const useLogin = () => {
     role,
   }) => {
     setLoading(true); // Set loading state to true when starting the sign-up process
-    console.log({ fullname, email, password, confirmPassword, role });
 
     try {
       // Check if password and confirmPassword match
@@ -32,7 +27,7 @@ export const useLogin = () => {
         email: email,
         password: password,
       });
-      console.log(data);
+
       if (error) {
         throw error;
       }
