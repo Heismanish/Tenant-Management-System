@@ -10,7 +10,7 @@ const NewTenant = () => {
       <div className="flex justify-center">
         <IoPersonAdd
           className="text-[30px] cursor-pointer "
-          onClick={() => navigate("/owner/123/newTenant")}
+          onClick={() => navigate("/owner/newTenant")}
         />
       </div>
     </div>
