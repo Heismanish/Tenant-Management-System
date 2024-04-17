@@ -1,13 +1,20 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import OwnerDetails from "../../Components/Owner/OwnerDetails";
 import NewTenant from "../../Components/Owner/NewTenant";
 import TenantList from "../../Components/Owner/TenantList";
 import MaintainenceLogs from "../../Components/Owner/MaintainenceLogs";
-import useGetTenants from "../../hooks/useGetTenants";
+import useGetTenants from "../../hooks/useGetTenants.js";
+
+import useUser from "../../hooks/useUser.js";
+
 
 const DashBoard = () => {
-  const { userId } = useParams();
+  // const { userId } = useParams();
   const { loading, tenants } = useGetTenants();
+  // const {user} = useAuth()
+ const {userData}=useUser()
+ console.log(userData)
   // Dummy data for OwnerDetails component
   const ownerInfo = {
     ownerName: "Subhash",
@@ -21,9 +28,10 @@ const DashBoard = () => {
     { log: "Checked heating system", roomNumber: 102 },
     { log: "Cleaned gutters", roomNumber: 103 },
   ];
-  console.log(tenants);
+
   return (
     <div className="w-full h-full flex lg:gap-20 justify-center ">
+    
       <div className="flex flex-col gap-5">
         <div className="flex gap-5">
           <OwnerDetails propertyInfo={ownerInfo} /> <NewTenant />

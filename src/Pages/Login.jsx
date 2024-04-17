@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthProvider";
+import useUser from "../hooks/useUser";
 
 const Login = () => {
   const [loginData,setLoginData] = useState({email:"",password:""})
@@ -13,8 +14,8 @@ const Login = () => {
     const {data:{user,session},error} = await login(loginData.email,loginData.password)
     if(error) { throw Error(error);}
     if (user && session) {
-      console.log(user)
-      navigate("/owner/2231");
+   
+      navigate("/owner");
     }
   }
 
