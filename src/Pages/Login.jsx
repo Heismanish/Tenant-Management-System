@@ -1,11 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthProvider";
 
 const Login = () => {
+  const [loginData,setLoginData] = useState({email:"",password:""})
+  const navigate = useNavigate();
+
+  const {login} = useAuth();
+
+  const handleSubmit =async (e)=>{
+    e.preventDefault();
+    const {data:{user,session},error} = await login(loginData.email,loginData.password)
+    if(error) { throw Error(error);}
+    if (user && session) {
+      console.log(user)
+      navigate("/owner/2231");
+    }
+  }
+
+  const handleChange = (e)=>{
+    console.log(e.target.name)
+    e.preventDefault()
+    const {name,value} = e.target;
+    setLoginData((prev)=>({...prev,[name]:value}))
+  }
+
   return (
     <div className="border rounded-lg border-gray-900 pt-5 text-black">
       <h1 className="text-xl font-semibold text-center mt-2">Login</h1>
-      <form className="card-body items-center text-center text-black">
+      <form className="card-body items-center text-center text-black" onSubmit={handleSubmit}>
         <label className="input input-bordered flex items-center gap-2 bg-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -17,26 +40,15 @@ const Login = () => {
             <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
           </svg>
           <input
+          name="email"
             type="text"
             className="grow placeholder-black placeholder-opacity-50"
             placeholder="Email"
+            value={loginData.email}
+            onChange={handleChange}
           />
         </label>
-        <label className="input input-bordered flex items-center gap-2 bg-gray-400">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="w-4 h-4 opacity-70"
-          >
-            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-          </svg>
-          <input
-            type="text"
-            className="grow placeholder-black placeholder-opacity-50"
-            placeholder="Username"
-          />
-        </label>
+       
         <label className="input input-bordered flex items-center gap-2 bg-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -51,18 +63,21 @@ const Login = () => {
             />
           </svg>
           <input
+          name="password"
             type="password"
             className="grow placeholder-black placeholder-opacity-50"
             placeholder="Password"
+            value={loginData.password}
+            onChange={handleChange}
           />
         </label>
         <button className="btn" onClick={() => {}}>
           Login
         </button>
         <p>
-          Don't have an{" "}
+          New User?{" "}
           <Link to={"/signup"}>
-            <span className="text-blue-700">account?</span>
+            <span className="text-blue-700">Signup</span>
           </Link>
         </p>
       </form>

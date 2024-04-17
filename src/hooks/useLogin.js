@@ -1,13 +1,9 @@
 import { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+import { supabase } from "../supabase/client";
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false); // Set initial loading state to false
+
   const login = async ({
     fullname,
     email,
@@ -27,36 +23,32 @@ export const useLogin = () => {
         email: email,
         password: password,
       });
-
+      console.log(data, error);
       if (error) {
         throw error;
       }
 
       // If signup is successful, update user profile with additional information
-      const { user, error: profileError } = await supabase
+      const { error: UpdateError } = await supabase
         .from("users")
-        .insert({
-          user_id: data.user.id,
-          fullname: fullname,
-          email: email,
-          password: password,
+        .update({
+          name: fullname,
           role: role,
-        });
+        })
+        .eq("id", data.user.id);
 
-      console.log(user, profileError);
-
-      if (profileError) {
-        throw profileError;
+      if (UpdateError) {
+        throw UpdateError;
       }
 
-      return { user }; // Return user data if everything is successful
+      return { data };
     } catch (error) {
       console.error("Error signing up:", error);
-      return { error }; // Return error if sign-up process fails
+      return { error };
     } finally {
-      setLoading(false); // Set loading state back to false after sign-up process completes
+      setLoading(false);
     }
   };
 
-  return { loading, login }; // Return loading state and login function from the hook
+  return { loading, login };
 };
