@@ -1,6 +1,6 @@
-import React from "react";
+
 import { useParams } from "react-router-dom";
-import useTenants from "../../store/useTenants";
+import useTenants from "../../store/useStore";
 
 const ViewTenant = () => {
   const { tenantId } = useParams();

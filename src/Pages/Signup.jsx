@@ -25,7 +25,6 @@ const Signup = () => {
       confirmPassword,
       role,
     });
-    console.log(user)
     // navigate(`/owner/1234`);
   };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useTenants from "../store/useTenants";
+import useTenants from "../store/useStore";
 
 const tenantList = [
   { id: 1, name: "Alice", email: "alice@example.com" },

@@ -7,15 +7,23 @@ export const useAuth = () => useContext(AuthContext);
 const login = (email, password) =>
 supabase.auth.signInWithPassword({ email, password });
 
-const AuthProvider = ({ children }) => {
+const signOut = () => supabase.auth.signOut();
+
+
+const AuthProvider = (props) => {
     const [user, setUser] = useState(null);
+   /* eslint-disable-next-line  */
     const [auth, setAuth] = useState(false);
+    const [userData,setUserData] = useState(null)
   
     useEffect(() => {
       const { data } = supabase.auth.onAuthStateChange((event, session) => {
         if (event === "SIGNED_IN") {
           setUser(session.user);
           setAuth(true);
+        } else if (event === "SIGNED_OUT") {
+          setUser(null);
+          setAuth(false);
         }
       });
       return () => {
@@ -24,7 +32,8 @@ const AuthProvider = ({ children }) => {
     }, []);
 
   return (
-    <AuthContext.Provider value={{ user,login }}>{children}</AuthContext.Provider>
+    /* eslint-disable-next-line react/prop-types */
+    <AuthContext.Provider value={{ auth,user,login,signOut }}>{props.children}</AuthContext.Provider>
   );
 };
 
