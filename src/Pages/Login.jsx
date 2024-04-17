@@ -1,34 +1,41 @@
 import { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthProvider";
 
 const Login = () => {
-  const [loginData,setLoginData] = useState({email:"",password:""})
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  const {login} = useAuth();
+  const { login } = useAuth();
 
-  const handleSubmit =async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const {data:{user,session},error} = await login(loginData.email,loginData.password)
-    if(error) { throw Error(error);}
-    if (user && session) {
-      console.log(user)
-      navigate("/owner/2231");
+    const {
+      data: { user, session },
+      error,
+    } = await login(loginData.email, loginData.password);
+    if (error) {
+      throw Error(error);
     }
-  }
+    if (user && session) {
+      console.log(user);
+      navigate("/owner");
+    }
+  };
 
-  const handleChange = (e)=>{
-    console.log(e.target.name)
-    e.preventDefault()
-    const {name,value} = e.target;
-    setLoginData((prev)=>({...prev,[name]:value}))
-  }
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setLoginData((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <div className="border rounded-lg border-gray-900 pt-5 text-black">
       <h1 className="text-xl font-semibold text-center mt-2">Login</h1>
-      <form className="card-body items-center text-center text-black" onSubmit={handleSubmit}>
+      <form
+        className="card-body items-center text-center text-black"
+        onSubmit={handleSubmit}
+      >
         <label className="input input-bordered flex items-center gap-2 bg-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +47,7 @@ const Login = () => {
             <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
           </svg>
           <input
-          name="email"
+            name="email"
             type="text"
             className="grow placeholder-black placeholder-opacity-50"
             placeholder="Email"
@@ -48,7 +55,7 @@ const Login = () => {
             onChange={handleChange}
           />
         </label>
-       
+
         <label className="input input-bordered flex items-center gap-2 bg-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +70,7 @@ const Login = () => {
             />
           </svg>
           <input
-          name="password"
+            name="password"
             type="password"
             className="grow placeholder-black placeholder-opacity-50"
             placeholder="Password"

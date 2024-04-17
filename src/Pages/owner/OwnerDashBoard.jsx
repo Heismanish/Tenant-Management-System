@@ -21,7 +21,7 @@ const DashBoard = () => {
     { log: "Checked heating system", roomNumber: 102 },
     { log: "Cleaned gutters", roomNumber: 103 },
   ];
-  console.log(tenants);
+
   return (
     <div className="w-full h-full flex lg:gap-20 justify-center ">
       <div className="flex flex-col gap-5">
