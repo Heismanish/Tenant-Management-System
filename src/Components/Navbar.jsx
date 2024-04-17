@@ -1,6 +1,6 @@
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 z-1 fixed">
+    <div className="navbar bg-base-100 z-1 fixed bg-[#90e0ef] text-black">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">TMS</a>
       </div>
@@ -27,7 +27,7 @@ const Navbar = () => {
         </button>
 
         {/* User Image */}
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-end text-white">
           <div
             tabIndex={0}
             role="button"

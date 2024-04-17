@@ -4,6 +4,7 @@ import TenantDashBoard from "./Components/TenantDashBoard";
 import OwnerDashBoard from "./Pages/OwnerDashBoard";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import AddNewTennant from "./Components/Owner/AddNewTennant";
 
 function App() {
   return (
@@ -13,15 +14,8 @@ function App() {
         {" "}
         <Route element={<Login />} path="/" />
         <Route element={<Signup />} path="/signup" />
-        <Route
-          element={<OwnerDashBoard />}
-          path="/owner/:userId"
-          // loader={async ({ params }) => {
-          //   return fetch(
-          //     `/fake/api/teams/${params.teamId}.json
-          //   );
-          // }}
-        />
+        <Route element={<OwnerDashBoard />} path="/owner/:userId" />
+        <Route element={<AddNewTennant />} path="/owner/:userId/newTenant" />
         <Route element={<TenantDashBoard />} path="/tenant" />
         <Route element={<TenantDashBoard />} path="/tenant/:userId" />
       </Routes>
