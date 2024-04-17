@@ -11,6 +11,7 @@ const AddNewTennant = () => {
     startDate: "",
     endDate: "",
     rentAmount: "",
+    roomNumber: "",
   });
 
   const [leaseInfo, setLeaseInfo] = useState({
@@ -37,7 +38,7 @@ const AddNewTennant = () => {
     e.preventDefault();
     // Handle form submission logic here
     console.log("Submitted:", { tenantInfo, contractInfo, leaseInfo });
-    setTenantInfo({ name: "", email: "", phone: "" });
+    setTenantInfo({ name: "", email: "", phone: "", roomNumber: "" });
     setContractInfo({ startDate: "", endDate: "", rentAmount: "" });
     setLeaseInfo({ duration: "", terms: "" });
   };
@@ -47,7 +48,7 @@ const AddNewTennant = () => {
       <h1 className="text-xl text-center font-bold">Add New Tenant</h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col p-4 gap-10 text-black"
+        className="flex flex-col p-4 gap-3 text-black"
       >
         <div className="flex gap-20">
           <div className="flex flex-col gap-3">
@@ -88,28 +89,42 @@ const AddNewTennant = () => {
           </div>
           <div className="flex flex-col gap-3">
             <h2>Contract Info</h2>
+            <div className="flex gap-10">
+              <label className="flex flex-col ">
+                Start Date:
+                <input
+                  type="date"
+                  name="startDate"
+                  value={contractInfo.startDate}
+                  onChange={handleContractInfoChange}
+                  placeholder="Start Date"
+                  className="input input-bordered max-w-xs text-xs bg-gray-300"
+                />
+              </label>
+              <label className="flex flex-col ">
+                End Date:
+                <input
+                  type="date"
+                  name="endDate"
+                  value={contractInfo.endDate}
+                  onChange={handleContractInfoChange}
+                  placeholder="End Date"
+                  className="input input-bordered max-w-xs text-xs bg-gray-300"
+                />
+              </label>
+            </div>
             <label>
-              Start Date:
+              Room Number:
               <input
-                type="date"
-                name="startDate"
-                value={contractInfo.startDate}
+                type="text"
+                name="roomNumber"
+                value={contractInfo.roomNumber}
                 onChange={handleContractInfoChange}
-                placeholder="Start Date"
+                placeholder="Room Number"
                 className="input input-bordered w-full max-w-xs bg-gray-300"
               />
             </label>
-            <label>
-              End Date:
-              <input
-                type="date"
-                name="endDate"
-                value={contractInfo.endDate}
-                onChange={handleContractInfoChange}
-                placeholder="End Date"
-                className="input input-bordered w-full max-w-xs bg-gray-300"
-              />
-            </label>
+
             <label>
               Rent Amount:
               <input
