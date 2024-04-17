@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLogin } from "../hooks/useLogin";
-import { useNavigate } from "react-router-dom";
+import { useSignup } from "../hooks/useSignup";
+// import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [signupData, setSignupData] = useState({
     fullname: "",
     email: "",
@@ -12,25 +12,26 @@ const Signup = () => {
     confirmPassword: "",
     role: "",
   });
-  const { loading, login } = useLogin();
+  const { loading, signup } = useSignup();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     const { fullname, email, password, confirmPassword, role } = signupData;
 
-    const { user } = await login({
+    const { user } = await signup({
       fullname,
       email,
       password,
       confirmPassword,
       role,
     });
-
-    navigate("/owner");
+    console.log(user)
+    // navigate(`/owner/1234`);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(e.target,name,value);
     setSignupData((prevData) => ({
       ...prevData,
       [name]: value,
