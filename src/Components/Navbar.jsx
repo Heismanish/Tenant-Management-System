@@ -1,7 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthProvider";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { auth, signOut } = useAuth();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      const { error } = await signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="navbar  z-1 fixed bg-[#90e0ef] text-black">
       <div className="flex-1">
@@ -58,9 +70,8 @@ const Navbar = () => {
             <li>
               <a>Settings</a>
             </li>
-            <li>
-              <a>Logout</a>
-            </li>
+
+            {auth && <button onClick={handleLogout}>LogOut</button>}
           </ul>
         </div>
       </div>

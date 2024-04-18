@@ -6,7 +6,7 @@ const Login = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  const { login } = useAuth();
+  const { login, userData } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,9 +17,17 @@ const Login = () => {
     if (error) {
       throw Error(error);
     }
-    if (user && session) {
-      console.log(user);
-      navigate("/owner");
+    console.log(userData);
+    if (user && session && userData.role) {
+      // Check user role and navigate accordingly
+      if (userData?.role === "owner") {
+        navigate("/owner");
+      } else if (userData?.role === "tenant") {
+        navigate("/tenant");
+      } else {
+        // Handle unknown role or default route
+        navigate("/");
+      }
     }
   };
 

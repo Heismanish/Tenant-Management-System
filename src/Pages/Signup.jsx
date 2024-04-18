@@ -26,7 +26,7 @@ const Signup = () => {
       role,
     });
     console.log(user);
-    navigate("/owner");
+    // navigate(`/owner/1234`);
   };
 
   const handleInputChange = (e) => {

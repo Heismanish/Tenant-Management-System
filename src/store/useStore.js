@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
-const useTenants = create((set) => ({
+const useStore = create((set) => ({
   tenants: [],
   setTenants: (tenants) => set({ tenants }),
 }));
 
-export default useTenants;
+export default useStore;

@@ -1,16 +1,19 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import OwnerDetails from "../../Components/Owner/OwnerDetails";
 import NewTenant from "../../Components/Owner/NewTenant";
 import TenantList from "../../Components/Owner/TenantList";
 import MaintainenceLogs from "../../Components/Owner/MaintainenceLogs";
-import useGetTenants from "../../hooks/useGetTenants";
+import useGetTenants from "../../hooks/useGetTenants.js";
+
+import { useAuth } from "../../Context/AuthProvider.jsx";
 
 const DashBoard = () => {
-  const { userId } = useParams();
   const { loading, tenants } = useGetTenants();
+  const { userData } = useAuth();
   // Dummy data for OwnerDetails component
   const ownerInfo = {
-    ownerName: "Subhash",
+    ownerName: userData.name,
     totalRooms: 10,
     availableRooms: 5,
     otherInfo: "Some other info about the owner",
